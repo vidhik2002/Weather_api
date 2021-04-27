@@ -1,1 +1,50 @@
-<h1>hi how is the weather</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                {{ form.name }}
+                            </div>
+                            <div class="control">
+                                <button type="submit" class="button is-info">
+                                    Add City
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+    {% for city_weather in weather_data %}
+    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+    <div class="card-header"></div>
+        <div class="card-body">
+            <h1 class="card-title">Weather</h1>
+            <p class="card-text">{{ city_weather.city }}
+            <h4>{{ city_weather.temperature }}</h4>
+            <h4>{{ city_weather.feels_like }}</h4>
+            <h4>{{ city_weather.humidity }}</h4>
+            <h4>{{ city_weather.description }}</h4>
+            <h4>{{ city_weather.icon }}</h4>
+      </div>
+    </div>
+    {% endfor %}
+    </section>
+</body>
+</html>
+
+
