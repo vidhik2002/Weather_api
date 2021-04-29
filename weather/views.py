@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import requests
 from .models import City
 from .forms import MainForm
 
 
 def index(request):
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid=b0f11ba775d36e6d23cc493a249875af'
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid=API_KEY'
     error = ""
     msg = ""
     msg_class = ""
@@ -21,7 +21,7 @@ def index(request):
                 if req['cod'] == 200:
                     form.save()
                 else:
-                    error = "City doesnot exist "
+                    error = "City does not exist "
             else:
                 error = "City already there"
 
@@ -51,5 +51,10 @@ def index(request):
                'form': form,
                'msg': msg,
                'msg_class': msg_class
-            }
+               }
     return render(request, 'home.html', context)
+
+
+def delete_city(request, city_name):
+    City.objects.filter(name=city_name).delete()
+    return redirect("home page")
