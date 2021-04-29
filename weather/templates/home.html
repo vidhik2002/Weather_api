@@ -23,18 +23,22 @@
                                 </button>
                             </div>
                         </div>
+                        {% if msg %}
+                            <div class="notification {{ msg_class }}">{{ msg }}</div>
+                        {% endif %}
                     </form>
                 </div>
             </div>
         </div>
     </section>
     <section>
+    <h1 class="card-title">Weather</h1>
     {% for city_weather in weather_data %}
     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
     <div class="card-header"></div>
         <div class="card-body">
-            <h1 class="card-title">Weather</h1>
-            <p class="card-text">{{ city_weather.city }}
+
+            <h2>{{ city_weather.city }}</h2>
             <h4>{{ city_weather.temperature }}</h4>
             <h4>{{ city_weather.feels_like }}</h4>
             <h4>{{ city_weather.humidity }}</h4>
